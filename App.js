@@ -1,8 +1,3 @@
-/**
- *
- * Inspiration: https://dribbble.com/shots/3731362-Event-cards-iOS-interaction
- */
-
 import * as React from 'react';
 import {
   StatusBar,
