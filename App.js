@@ -124,11 +124,20 @@ export default function App() {
   })
 
   React.useEffect(() => {
+    if (index === data.length - VISIBLE_ITEMS) {
+      // get new data
+      // fetch more data
+      const newData = [...data, ...data];
+      setData(newData);
+    }
+  });
+
+  React.useEffect(() => {
     Animated.spring(scrollXAnimated, {
       toValue: scrollXIndex,
       useNativeDriver: true,
     }).start();
-  })
+  });
 
   return (
     <FlingGestureHandler
