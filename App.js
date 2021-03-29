@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 const { width } = Dimensions.get('screen');
 import { EvilIcons } from '@expo/vector-icons';
-import { Directions, FlingGestureHandler } from 'react-native-gesture-handler';
+import { Directions, FlingGestureHandler, State } from 'react-native-gesture-handler';
 
 // https://www.creative-flyers.com
 const DATA = [
@@ -129,7 +129,7 @@ export default function App() {
     <FlingGestureHandler
       key='left'
       direction={Directions.LEFT}
-      onHandlerStateChange={ev => {
+      onHandlerStateChange={(ev) => {
         if (ev.nativeEvent.state === State.END) {
           if (index === data.length - 1) {
             return;
@@ -138,7 +138,18 @@ export default function App() {
         }
       }}
     >
-      <FlingGestureHandler>
+      <FlingGestureHandler
+        key='right'
+        direction={Directions.RIGHT}
+        onHandlerStateChange={(ev) => {
+          if (ev.nativeEvent.state === State.END) {
+            if (index === 0) {
+              return;
+            }
+            setActiveIndex(index - 1);
+          }
+        }}
+      >
         <SafeAreaView style={styles.container}>
           <StatusBar hidden />
           <OverflowItems data={data} />
