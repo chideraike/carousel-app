@@ -109,7 +109,13 @@ const OverflowItems = ({ data }) => {
 export default function App() {
   const [data, setData] = React.useState(DATA);
   const scrollXIndex = React.useRef(new Animated.Value(0)).current;
-  
+  const scrollXAnimated = React.useRef(new Animated.Value(0)).current;
+
+  React.useEffect(() => {
+    Animated.spring(scrollXAnimated, {
+      toValue: scrollXIndex
+    })
+  })
 
   return (
     <SafeAreaView style={styles.container}>
