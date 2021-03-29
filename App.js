@@ -75,6 +75,7 @@ const OVERFLOW_HEIGHT = 70;
 const SPACING = 10;
 const ITEM_WIDTH = width * 0.8;
 const ITEM_HEIGHT = ITEM_WIDTH * 1.7;
+const VISIBLE_ITEMS = 3;
 
 const OverflowItems = ({ data }) => {
   return (
@@ -113,8 +114,9 @@ export default function App() {
 
   React.useEffect(() => {
     Animated.spring(scrollXAnimated, {
-      toValue: scrollXIndex
-    })
+      toValue: scrollXIndex,
+      useNativeDriver: true,
+    }).start();
   })
 
   return (
@@ -142,8 +144,32 @@ export default function App() {
           );
         }}
         renderItem={({ item, index }) => {
+          const inputRange = [index - 1, index, index + 1]
+          const translateX = scrollXAnimated.interpolate({
+            inputRange,
+            outputRange: [50, 0, -100]
+          })
+          const scale = scrollXAnimated.interpolate({
+            inputRange,
+            outputRange: [.8, 1, 1.3]
+          })
+          const opacity = scrollXAnimated.interpolate({
+            inputRange,
+            outputRange: [1 - 1 / VISIBLE_ITEMS, 1, 0]
+          })
+
           return (
-            <View style={{ position: 'absolute', left: -ITEM_WIDTH / 2 }}>
+            <Animated.View
+              style={{
+                position: 'absolute',
+                left: -ITEM_WIDTH / 2,
+                opacity,
+                transform: [
+                  { translateX },
+                  { scale }
+                ]
+              }}
+            >
               <Image
                 source={{ uri: item.poster }}
                 style={{
@@ -151,7 +177,7 @@ export default function App() {
                   height: ITEM_HEIGHT
                 }}
               />
-            </View>
+            </Animated.View>
           );
         }}
       />
