@@ -79,7 +79,7 @@ const ITEM_HEIGHT = ITEM_WIDTH * 1.7;
 const OverflowItems = ({ data }) => {
   return (
     <View style={styles.overflowContainer}>
-      <View style={{ transform: [{ translateY }] }}>
+      <View>
         {data.map((item, index) => {
           return (
             <View key={index} style={styles.itemContainer}>
@@ -108,11 +108,47 @@ const OverflowItems = ({ data }) => {
 
 export default function App() {
   const [data, setData] = React.useState(DATA);
+  const scrollXIndex = React.useRef(new Animated.Value(0)).current;
+  
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar hidden />
       <OverflowItems data={data} />
+      <FlatList
+        data={data}
+        keyExtractor={(_, index) => String(index)}
+        horizontal
+        inverted
+        contentContainerStyle={{
+          flex: 1,
+          justifyContent: 'center',
+          padding: SPACING * 2,
+        }}
+        scrollEnabled={false}
+        removeClippedSubviews={false}
+        CellRendererComponent={({ item, index, children, style, ...props }) => {
+          const newStyle = [style, { zIndex: data.length - index }];
+          return (
+            <View style={newStyle} index={index} {...props}>
+              {children}
+            </View>
+          );
+        }}
+        renderItem={({ item, index }) => {
+          return (
+            <View style={{ position: 'absolute', left: -ITEM_WIDTH / 2 }}>
+              <Image
+                source={{ uri: item.poster }}
+                style={{
+                  width: ITEM_WIDTH,
+                  height: ITEM_HEIGHT
+                }}
+              />
+            </View>
+          );
+        }}
+      />
     </SafeAreaView>
   );
 }
@@ -137,7 +173,7 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     height: OVERFLOW_HEIGHT,
-    padding: SPACING * 2,
+    padding: SPACING,
   },
   itemContainerRow: {
     flexDirection: 'row',
