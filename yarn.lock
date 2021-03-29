@@ -1117,6 +1117,16 @@
   dependencies:
     "@types/hammerjs" "^2.0.36"
 
+"@expo-google-fonts/comfortaa@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/comfortaa/-/comfortaa-0.1.0.tgz#8321f87a42dc6bda420691354feb24eccb8b0668"
+  integrity sha512-DTvEiqFf2bjOgKMBqSWNIFweqw6DyzNQrLyzFeO5WGlNKET252nVju5fY8Ur/TInvKjhp4Sc59VLZyVrETrYLQ==
+
+"@expo-google-fonts/playfair-display@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/playfair-display/-/playfair-display-0.1.0.tgz#62cdb83011512c98d57f07a8c508e87ccfb7beb6"
+  integrity sha512-QqbV88kwEiEA5kfJ90XkuZNAeabV9DAB1S+Hu4kyKGWss71vD4LggCKKu3HC+t1sa9XD+P+pPuoBsxVjHXizhQ==
+
 "@expo/config-plugins@1.0.21":
   version "1.0.21"
   resolved "https://registry.yarnpkg.com/@expo/config-plugins/-/config-plugins-1.0.21.tgz#5a6f5c818dd7bccc2f3e381cbf8b0657c38bb302"
