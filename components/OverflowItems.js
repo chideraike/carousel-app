@@ -1,9 +1,37 @@
 import * as React from 'react';
 import { StyleSheet, View, Animated, Text } from 'react-native';
+import AppLoading from 'expo-app-loading'
 import { EvilIcons } from '@expo/vector-icons';
 import { OVERFLOW_HEIGHT, SPACING } from './Constant';
 
+// Importing Fonts from Expo Google Fonts
+import {
+    useFonts,
+    Comfortaa_300Light,
+    Comfortaa_400Regular,
+    Comfortaa_700Bold
+} from '@expo-google-fonts/comfortaa';
+import {
+    PlayfairDisplay_400Regular,
+    PlayfairDisplay_400Regular_Italic,
+    PlayfairDisplay_600SemiBold,
+    PlayfairDisplay_600SemiBold_Italic,
+    PlayfairDisplay_800ExtraBold,
+    PlayfairDisplay_800ExtraBold_Italic
+} from '@expo-google-fonts/playfair-display';
+
 export default OverflowItems = ({ data, scrollXAnimated }) => {
+    // Loading Fonts
+    let [fontsLoaded, error] = useFonts({
+        Comfortaa_300Light,
+        Comfortaa_400Regular,
+        PlayfairDisplay_800ExtraBold
+    });
+
+    if (!fontsLoaded) {
+        return <AppLoading />;
+    }
+
     const inputRange = [-1, 0, 1];
     const translateY = scrollXAnimated.interpolate({
         inputRange,
@@ -39,29 +67,32 @@ export default OverflowItems = ({ data, scrollXAnimated }) => {
 };
 
 const styles = StyleSheet.create({
+    overflowContainer: {
+        height: OVERFLOW_HEIGHT,
+        overflow: 'hidden',
+    },
+    itemContainer: {
+        height: OVERFLOW_HEIGHT,
+        padding: SPACING,
+    },
     title: {
         fontSize: 28,
         fontWeight: '900',
         textTransform: 'uppercase',
         letterSpacing: -1,
-    },
-    location: {
-        fontSize: 16,
-    },
-    date: {
-        fontSize: 12,
-    },
-    itemContainer: {
-        height: OVERFLOW_HEIGHT,
-        padding: SPACING,
+        fontFamily: 'PlayfairDisplay_800ExtraBold'
     },
     itemContainerRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
     },
-    overflowContainer: {
-        height: OVERFLOW_HEIGHT,
-        overflow: 'hidden',
+    location: {
+        fontSize: 16,
+        fontFamily: 'Comfortaa_300Light'
+    },
+    date: {
+        fontSize: 12,
+        fontFamily: 'Comfortaa_300Light'
     },
 });
