@@ -78,10 +78,15 @@ const ITEM_WIDTH = width * 0.76;
 const ITEM_HEIGHT = ITEM_WIDTH * 1.7;
 const VISIBLE_ITEMS = 3;
 
-const OverflowItems = ({ data }) => {
+const OverflowItems = ({ data, scrollXAnimated }) => {
+  const inputRange = [-1, 0, 1];
+  const translateY = scrollXAnimated.interpolate({
+    inputRange,
+    outputRange: [OVERFLOW_HEIGHT, 0, -OVERFLOW_HEIGHT]
+  })
   return (
     <View style={styles.overflowContainer}>
-      <View>
+      <Animated.View style={{ transform: [{ translateY }] }}>
         {data.map((item, index) => {
           return (
             <View key={index} style={styles.itemContainer}>
@@ -103,7 +108,7 @@ const OverflowItems = ({ data }) => {
             </View>
           );
         })}
-      </View>
+      </Animated.View>
     </View>
   );
 };
@@ -152,7 +157,7 @@ export default function App() {
       >
         <SafeAreaView style={styles.container}>
           <StatusBar hidden />
-          <OverflowItems data={data} />
+          <OverflowItems data={data} scrollXAnimated={scrollXAnimated} />
           <FlatList
             data={data}
             keyExtractor={(_, index) => String(index)}
