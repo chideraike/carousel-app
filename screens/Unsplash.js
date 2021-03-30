@@ -7,7 +7,7 @@ export default function Unsplash({ navigation }) {
             <Text>Unsplash Screen</Text>
             <Button
                 title="Unsplash Screen"
-                onPress={() => navigation.push('Unsplash')}
+                onPress={() => navigation.push('Unsplash', { name: 'More of Chidesco' })}
             />
             <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
             <Button title="Go back" onPress={() => navigation.goBack()} />
