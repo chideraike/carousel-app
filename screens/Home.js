@@ -66,7 +66,7 @@ export default function Home({ navigation }) {
                 }}
             >
                 <SafeAreaView style={styles.container}>
-                    <StatusBar hidden />
+                    <StatusBar barStyle="light-content" />
                     <OverflowItems data={data} scrollXAnimated={scrollXAnimated} />
                     <FlatList
                         data={data}
@@ -128,7 +128,7 @@ export default function Home({ navigation }) {
                     />
                     <Button
                         title="Unsplash Screen"
-                        onPress={() => navigation.navigate('Unsplash')}
+                        onPress={() => navigation.navigate('Unsplash', {name: 'Chidesco'})}
                     />
                 </SafeAreaView>
             </FlingGestureHandler>

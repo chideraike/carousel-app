@@ -23,9 +23,20 @@ export default function App() {
           component={Home}
           options={{
             title: 'Advanced Flatlist Carousel Animation',
+            headerStyle: {
+              backgroundColor: '#000000'
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontFamily: 'PlayfairDisplay_800ExtraBold'
+            },
           }}
         />
-        <Stack.Screen name="Unsplash" component={Unsplash} />
+        <Stack.Screen
+          name="Unsplash"
+          component={Unsplash}
+          options={({ route }) => ({ title: route.params.name })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
